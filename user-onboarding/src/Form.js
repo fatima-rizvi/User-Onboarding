@@ -18,10 +18,10 @@ export default function Form(props) {
         <form onSubmit = {onSubmit}>
             <button disabled = {disabled}>Submit</button>
             <div className='errors'>
-                <div>{errors.username}</div>
+                <div>{errors.name}</div>
                 <div>{errors.email}</div>
-                <div>{errors.role}</div>
-                <div>{errors.civil}</div>
+                <div>{errors.password}</div>
+                <div>{errors.termsOfService}</div>
             </div>
             <div className = 'form-inputs'>
                 <label>Name: &nbsp;
@@ -32,7 +32,7 @@ export default function Form(props) {
                         onChange = {onChange}
                     />
                 </label>
-                <label>Email:
+                <label>Email: &nbsp;
                     <input 
                         name='email'
                         type='text'
@@ -40,7 +40,7 @@ export default function Form(props) {
                         onChange={onChange}
                     />
                 </label>
-                <label>Password:
+                <label>Password: &nbsp;
                     <input 
                         name = 'password'
                         type = 'text'
@@ -48,7 +48,7 @@ export default function Form(props) {
                         onChange = {onChange}
                     />
                 </label>
-                <label>Read and agreed to Terms of Service
+                <label>Read and agreed to Terms of Service &nbsp;
                     <input 
                         name = 'termsOfService'
                         type = 'checkbox'
