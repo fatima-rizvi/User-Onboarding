@@ -11,6 +11,7 @@ describe('Quotes app', () => {
     const passInput = () => cy.get('input[name="password"]')
     const tosInput = () => cy.get('input[name="termsOfService"]')
     const subButton = () => cy.get('#submitBtn')
+    const errors = () => cy.get('.errors')
 
     it('Fill out the form', () => {
         nameInput()
@@ -38,6 +39,7 @@ describe('Quotes app', () => {
             .type('Fatima Rizvi')
         emailInput()
             .type('fatimarizvi@lambdastudents.com')
+            
         passInput()
             .type('12345678')
         //Check box
@@ -48,59 +50,106 @@ describe('Quotes app', () => {
             .click()
     })
 
-    it('check for form validation if name input is empty', () => {
-        //Check with if name is empty
+    it('check for name validation errors', () => {
+        //Check error if name is less than 3 chars
         nameInput()
-            .clear()
+            .type('Jo')
+        errors()
+            .contains('Name must be 3 chars or longer')
+        //Check error if name is empty
+        nameInput()
+            .type('{backspace}{backspace}')
+        errors()
+            .contains('Name is required')
+        //Check to see if form can be submitted without name being filled
         emailInput()
             .type('hi@hello.com')
         passInput()
             .type('123456')
         tosInput()
             .click()
-        //Check to see if the submit button is disabled and is unaffected by click
+        //Check to see if the submit button is disabled
         subButton()
             .should('be.disabled')
+        //Make the errors go away
+        nameInput()
+            .type('Joe')
+        errors()
+            .should('not.be.visible')
     })
 
-    it('check for form validation if email input is empty', () => {
-        //Check everything again with email empty
-        nameInput()
-            .type('Percy')
+    it('check for email validation errors', () => {
+        //Check error if email isn't valid
         emailInput()
-            .clear()
+            .type('ha')
+        errors()
+            .contains('Must be a valid email')
+        //Check error if email is empty
+        emailInput()
+            .type('{backspace}{backspace}')
+        errors()
+            .contains('Email is required')
+        //Check to see if form can be submitted without email being filled
+        nameInput()
+            .type('Harry')
         passInput()
             .type('123456')
         tosInput()
             .click()
+        //Check to see if the submit button is disabled
         subButton()
             .should('be.disabled')
+        //Make the errors disappear
+        emailInput()
+            .type('harrypotter@hogwarts.com')
+        errors()
+            .should('not.be.visible')
     })
 
-    it('check for form validation if password input is empty', () => {
-        //Check everything again with password empty
-        nameInput()
-            .type('Piper')
-        emailInput()
-            .type('piper@gmail.com')
+    it('check for password validation errors', () => {
+        //Check error if password isn't valid
         passInput()
-            .clear()
+            .type('12')
+        errors()
+            .contains('Password must be 6 chars or longer')
+        //Check error if password is empty
+        passInput()
+            .type('{backspace}{backspace}')
+        errors()
+            .contains('Password is required')
+        //Check to see if form can be submitted without password being filled
+        nameInput()
+            .type('Buddy')
+        emailInput()
+            .type('buddy@gmail.com')
         tosInput()
             .click()
+        //Check to see if the submit button is disabled
         subButton()
             .should('be.disabled')
+        //Make the errors disappear
+        passInput()
+            .type('123456')
+        errors()
+            .should('not.be.visible')
     })
 
-    it('check for form validation if Terms of Service input is not clicked', () => {
-        //Check everything again with Terms of Service unclicked
+    it('check for Terms of Service validation errors', () => {
+        //Check to see if form can be submitted without TOS being clicked
         nameInput()
-            .type('Hazel')
-        emailInput()
-            .type('hazel@gmail.com')
+            .type('Pam')
         passInput()
-            .clear('123456')
+            .type('123456')
+        emailInput()
+            .type('pam@dundler-mifflin.com')
+        //Check to see if the submit button is disabled
         subButton()
             .should('be.disabled')
+        //Make the errors disappear
+        tosInput()
+            .click()
+        errors()
+            .should('not.be.visible')
     })
 
 })
