@@ -17,8 +17,8 @@ describe('Quotes app', () => {
             .type('Fatima Rizvi')
             .should('have.value', 'Fatima Rizvi')
         emailInput()
-            .type('fatimarizvi@lambdastudents.com')
-            .should('have.value', 'fatimarizvi@lambdastudents.com')
+            .type('fatimarizvi@lambda.com')
+            .should('have.value', 'fatimarizvi@lambda.com')
         passInput()
             .type('12345678')
             .should('have.value', '12345678')
@@ -47,4 +47,60 @@ describe('Quotes app', () => {
         subButton()
             .click()
     })
+
+    it('check for form validation if name input is empty', () => {
+        //Check with if name is empty
+        nameInput()
+            .clear()
+        emailInput()
+            .type('hi@hello.com')
+        passInput()
+            .type('123456')
+        tosInput()
+            .click()
+        //Check to see if the submit button is disabled and is unaffected by click
+        subButton()
+            .should('be.disabled')
+    })
+
+    it('check for form validation if email input is empty', () => {
+        //Check everything again with email empty
+        nameInput()
+            .type('Percy')
+        emailInput()
+            .clear()
+        passInput()
+            .type('123456')
+        tosInput()
+            .click()
+        subButton()
+            .should('be.disabled')
+    })
+
+    it('check for form validation if password input is empty', () => {
+        //Check everything again with password empty
+        nameInput()
+            .type('Piper')
+        emailInput()
+            .type('piper@gmail.com')
+        passInput()
+            .clear()
+        tosInput()
+            .click()
+        subButton()
+            .should('be.disabled')
+    })
+
+    it('check for form validation if Terms of Service input is not clicked', () => {
+        //Check everything again with Terms of Service unclicked
+        nameInput()
+            .type('Hazel')
+        emailInput()
+            .type('hazel@gmail.com')
+        passInput()
+            .clear('123456')
+        subButton()
+            .should('be.disabled')
+    })
+
 })
