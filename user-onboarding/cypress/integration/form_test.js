@@ -10,6 +10,7 @@ describe('Quotes app', () => {
     const emailInput = () => cy.get('input[name="email"]')
     const passInput = () => cy.get('input[name="password"]')
     const tosInput = () => cy.get('input[name="termsOfService"]')
+    const subButton = () => cy.get('#submitBtn')
 
     it('Fill out the form', () => {
         nameInput()
@@ -41,6 +42,9 @@ describe('Quotes app', () => {
             .type('12345678')
         //Check box
         tosInput()
+            .click()
+        //Click submit button
+        subButton()
             .click()
     })
 })
