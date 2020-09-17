@@ -56,7 +56,7 @@ export default function Form(props) {
                 <div>{errors.password}</div>
                 <div>{errors.termsOfService}</div>
             </div>
-            <button disabled = {disabled}>Submit</button>
+            <button className = 'submitBtn' disabled = {disabled}>Submit</button>
         </form>
     )
 
