@@ -94,6 +94,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>New User Form</h1>
       <Form 
       values = {formValues}
       change = {inputChange}

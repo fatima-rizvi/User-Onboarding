@@ -16,13 +16,6 @@ export default function Form(props) {
 
     return(
         <form onSubmit = {onSubmit}>
-            <button disabled = {disabled}>Submit</button>
-            <div className='errors'>
-                <div>{errors.name}</div>
-                <div>{errors.email}</div>
-                <div>{errors.password}</div>
-                <div>{errors.termsOfService}</div>
-            </div>
             <div className = 'form-inputs'>
                 <label>Name: &nbsp;
                     <input 
@@ -57,6 +50,13 @@ export default function Form(props) {
                     />
                 </label>
             </div>
+            <div className='errors'>
+                <div>{errors.name}</div>
+                <div>{errors.email}</div>
+                <div>{errors.password}</div>
+                <div>{errors.termsOfService}</div>
+            </div>
+            <button disabled = {disabled}>Submit</button>
         </form>
     )
 
